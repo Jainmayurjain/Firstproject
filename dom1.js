@@ -1,0 +1,9 @@
+document.title='My title';
+document.getElementById('header-title').innerText='My Item Lister';
+document.getElementById('h2id').innerText='Add My items';
+document.getElementById('h2id').style.color='green';
+document.getElementById('h2id').innerHTML='<b>Add My items</b>'
+//document.title.style.borderBottom = '3px solid #000';
+document.getElementById('header-title').style.borderBottom = '3px solid #000';
+document.getElementById('titl').style.borderBottom = '3px solid #000';
+document.getElementById('main-header').style.borderBottom = '3px solid #000';
