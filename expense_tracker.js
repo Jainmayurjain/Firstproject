@@ -21,6 +21,7 @@ function addItem(event) {
 
     let extraIt = document.getElementById('extraItem').value;
     li.appendChild(document.createTextNode(" " + extraIt));
+    li.id=extraIt
 
     let category = document.getElementById('category').value;
     li.appendChild(document.createTextNode(" " + category));
@@ -40,13 +41,20 @@ function addItem(event) {
     let newUser = new Input(item.value, extraItem.value, categ.value);
     let newUserStr = JSON.stringify(newUser);
     localStorage.setItem(extraItem.value, newUserStr);
+    //localStorage.setItem((new Date()).getTime(), newUserStr); // To get input as per sec
+
+    item.value = '';
+    extraItem.value = '';
+    categ.value = '';
 
     itemList.addEventListener('click', removeItem);
     function removeItem(event) {
         if (event.target.classList.contains('delete')) {
                 let li = event.target.parentElement;
+                if(li.id==newUser.description){
                 localStorage.removeItem(newUser.description);
                 itemList.removeChild(li);
+                }
         }
     }
 
@@ -54,11 +62,14 @@ function addItem(event) {
     function editItem(event) {
         if (event.target.classList.contains('edit')) {
             let li = event.target.parentElement;
-            //localStorage.removeItem(newUser.description)
+            if(li.id==newUser.description){
+            localStorage.removeItem(newUser.description)
+            itemList.removeChild(li);
             item.value = newUser.amount;
             extraItem.value = newUser.description;
             categ.value = newUser.category;
-            //itemList.removeChild(li);
+        }
+
         }
     }
 
