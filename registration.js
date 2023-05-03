@@ -56,13 +56,37 @@ function addItem(event) {
     email.value = '';
     phone.value = '';
 
-    /*function showOutput(res) {
-        document.getElementById('res').innerHTML = `
-        <div class="card mt-3">
-          <div class="card-body">
-            <pre>${res.name},${res.email},${res.phone}</pre>
-          </div>
-        </div>`;
-      }*/
-
 }
+
+function showOutput(res) {
+  let li = document.createElement('li');
+  li.appendChild(document.createTextNode(res.name));
+
+  li.appendChild(document.createTextNode(" " + res.email));
+  li.id=res.id
+
+  li.appendChild(document.createTextNode(" " + res.phone));
+
+  let delbutton = document.createElement('button');
+  delbutton.className = 'btn btn-danger btn-sm delete';
+  delbutton.appendChild(document.createTextNode('Delete'));
+  li.appendChild(delbutton);
+
+  let editbutton = document.createElement('button');
+  editbutton.className = 'btn btn-primary btn-sm edit';
+  editbutton.appendChild(document.createTextNode('Edit'));
+  li.appendChild(editbutton);
+
+  itemList.appendChild(li);
+}
+
+window.addEventListener("DOMContentLoaded", ()=>{
+  axios.get("https://crudcrud.com/api/c82e5c5a765b459abda551a95ce03bad/registration")
+  .then( (res)=> {
+      for(let i=0;i<res.data.length;i++){
+          showOutput(res.data[i])
+      }
+      })
+  .catch( (err)=> console.log(err))
+
+})
